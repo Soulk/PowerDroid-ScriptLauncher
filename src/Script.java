@@ -4,14 +4,20 @@
 public class Script {
     private int id;
     private int idUser;
-    private String filenameapk, filenameapktest, filenamemanifest, filenamemanifestandroid;
-    public Script(int id, int idUser, String filenameapk, String filenameapktest, String filenamemanifest, String filenamemanifestandroid) {
+
+    String method;
+   // private String filenameapk, filenameapktest, filenamemanifest, filenamemanifestandroid;
+    public Script() {
+
+    }
+    public Script(int id, int idUser, String method) {
         this.id = id;
         this.idUser = idUser;
-        this.filenameapk = filenameapk;
+        this.method = method;
+        /*this.filenameapk = filenameapk;
         this.filenameapktest = filenameapktest;
         this.filenamemanifest = filenamemanifest;
-        this.filenamemanifestandroid = filenamemanifestandroid;
+        this.filenamemanifestandroid = filenamemanifestandroid;*/
     }
     public int getId() {
         return id;
@@ -29,7 +35,16 @@ public class Script {
         this.idUser = idUser;
     }
 
-    public String getFilenameapk() {
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    /*public String getFilenameapk() {
         return filenameapk;
     }
 
@@ -59,6 +74,19 @@ public class Script {
 
     public void setFilenamemanifestandroid(String filenamemanifestandroid) {
         this.filenamemanifestandroid = filenamemanifestandroid;
+    }*/
+
+    @Override
+    public String toString() {
+        return "Script{" +
+                "id=" + id +
+                ", idUser=" + idUser +
+                ",method=" + method
+                /*", filenameapk='" + filenameapk + '\'' +
+                ", filenameapktest='" + filenameapktest + '\'' +
+                ", filenamemanifest='" + filenamemanifest + '\'' +
+                ", filenamemanifestandroid='" + filenamemanifestandroid + '\'' */+
+                '}';
     }
 
 
