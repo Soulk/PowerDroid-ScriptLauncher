@@ -1,18 +1,20 @@
+package model;
+
 /**
  * Created by David on 27/01/2017.
  */
 public class Script {
     private int id;
-    private int idUser;
+    private int idFile;
 
     String method;
    // private String filenameapk, filenameapktest, filenamemanifest, filenamemanifestandroid;
     public Script() {
 
     }
-    public Script(int id, int idUser, String method) {
+    public Script(int id, int idFile, String method) {
         this.id = id;
-        this.idUser = idUser;
+        this.idFile = idFile;
         this.method = method;
         /*this.filenameapk = filenameapk;
         this.filenameapktest = filenameapktest;
@@ -27,12 +29,12 @@ public class Script {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getIdFile() {
+        return idFile;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setIdFile(int idFile) {
+        this.idFile = idFile;
     }
 
 
@@ -78,9 +80,9 @@ public class Script {
 
     @Override
     public String toString() {
-        return "Script{" +
+        return "model.Script{" +
                 "id=" + id +
-                ", idUser=" + idUser +
+                ", idFile=" + idFile +
                 ",method=" + method
                 /*", filenameapk='" + filenameapk + '\'' +
                 ", filenameapktest='" + filenameapktest + '\'' +

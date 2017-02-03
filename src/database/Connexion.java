@@ -1,3 +1,5 @@
+package database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,7 +37,7 @@ public class Connexion {
             e.printStackTrace();
         }
     }
-    public Connection getDbconnect() {
+    public static Connection getDbconnect() {
         return dbconnect;
     }
     public String getUrl() {
