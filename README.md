@@ -19,20 +19,20 @@ PowerDroid-ScriptAnalyser a été développé en utilisant Java -J2E ainsi que l
 
 ### Installation
 
-L'application nécessite l'installation de [Node](https://nodejs.org/en/) et d'une base de donnée [Postgresql](https://www.postgresql.org/) existante.
+L'application nécessite l'installation simplement un JDK 1.8 ainsi que les drivers de connexion JDBC/PostgreSQL.
 
 Récupération des sources du serveur.
 
 ```sh
-$ git clone https://github.com/Soulk/PowerDroid.git
+$ git clone https://github.com/Soulk/PowerDroid-ScriptLauncher.git
 ```
 
-Installe les dépendances et start le serveur.
+Lancement de la classe Java
 
 ```sh
-$ cd [votre repo]
-$ npm install
-$ npm start
+$ Main.java
 ```
 
+### Utilisation
 
+L'utilisation se fait simplement au lancement, le serveur est ensuite près à effectuer toutes ses tâches de manière automatique. 
