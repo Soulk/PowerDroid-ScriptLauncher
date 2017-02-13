@@ -21,6 +21,11 @@ PowerDroid-ScriptAnalyser a été développé en utilisant Java -J2E ainsi que l
 
 L'application nécessite l'installation simplement un JDK 1.8 ainsi que les drivers de connexion JDBC/PostgreSQL.
 
+```sh
+sudo apt-get install android-tools-adb android-tools-fastboot -y
+```
+
+
 Récupération des sources du serveur.
 
 ```sh
