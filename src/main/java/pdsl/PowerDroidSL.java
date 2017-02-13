@@ -1,6 +1,12 @@
 package pdsl;
 
 import database.Connexion;
+import database.FileDatabase;
+import database.ResultDatabase;
+import database.ScriptDatabase;
+import model.Result;
+import model.Script;
+import model.ScriptFiles;
 import model.ScriptLauncher;
 
 import java.io.*;
@@ -20,6 +26,16 @@ public class PowerDroidSL {
         Connexion con = new Connexion("jdbc:postgresql://localhost:5432/todo","postgres","lolilol97");
 
         ScriptLauncher sl = new ScriptLauncher();
+
+        //TEST DB+ Creation fichier
+        /*sl.getAllScript();
+        for(Script s : sl.getL_script()) {
+            ScriptFiles sf= sl.loadScriptFiles(s);
+            sl.deleteScriptFiles(sf);
+        }
+        ScriptDatabase.delete(ScriptDatabase.all().get(0));
+        Result r = new Result(1, 1 , new File("pom.xml"));
+        ResultDatabase.insertResult(r);*/
 
         //INIT POWER MONITOR TODO
 

@@ -17,7 +17,11 @@ import java.util.regex.Pattern;
  * Created by David on 27/01/2017.
  */
 public class ScriptLauncher {
+
     List<Script> l_script;
+    public List<Script> getL_script() {
+        return l_script;
+    }
 
     public ScriptLauncher() {
         l_script = new ArrayList<Script>();
@@ -31,6 +35,7 @@ public class ScriptLauncher {
             ScriptFiles files = loadScriptFiles(script);
             if(files != null){
                 Result result = executeScript(script, files);
+                deleteScriptFiles(files);
                 deleteScript(script);
                 updateResult(result);
             }
@@ -49,7 +54,9 @@ public class ScriptLauncher {
     public ScriptFiles loadScriptFiles(Script script){
         return FileDatabase.select(script.getIdFile());
     }
-
+    public void deleteScriptFiles(ScriptFiles scriptFile) {
+        FileDatabase.delete(scriptFile);
+    }
     public Result executeScript(Script script, ScriptFiles files){
         Result result = null;
         File pathFile = new File("\"./script/platform-tools/script.bat\"");
@@ -116,7 +123,7 @@ public class ScriptLauncher {
                 //process.waitFor();
 
 
-                result = new Result(script.getIdFile(), outputFile);
+                result = new Result(script.getId(),script.getIdFile(), outputFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

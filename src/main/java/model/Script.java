@@ -6,9 +6,7 @@ package model;
 public class Script {
     private int id;
     private int idFile;
-
     String method;
-   // private String filenameapk, filenameapktest, filenamemanifest, filenamemanifestandroid;
     public Script() {
 
     }
@@ -16,10 +14,6 @@ public class Script {
         this.id = id;
         this.idFile = idFile;
         this.method = method;
-        /*this.filenameapk = filenameapk;
-        this.filenameapktest = filenameapktest;
-        this.filenamemanifest = filenamemanifest;
-        this.filenamemanifestandroid = filenamemanifestandroid;*/
     }
     public int getId() {
         return id;

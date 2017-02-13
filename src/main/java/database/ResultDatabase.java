@@ -16,13 +16,13 @@ public class ResultDatabase {
 
     public static void insertResult(Result result){
         PreparedStatement stmt = null;
-        String query = "INSERT INTO result (idFile,data) VALUES (?, ?)";
+        String query = "UPDATE result AS r SET data = ?, status = true WHERE idresult = ?";
 
         try {
             stmt = Connexion.getDbconnect().prepareStatement(query);
-            stmt.setInt(1, result.getIdFile());
-            stmt.setBinaryStream(2, Files.newInputStream(result.getFileResult().toPath()));
-            stmt.executeUpdate(query);
+            stmt.setBinaryStream(1, Files.newInputStream(result.getFileResult().toPath()));
+            stmt.setInt(2, result.getIdResult());
+            stmt.executeUpdate();
         } catch (SQLException e ) {
         } catch (IOException e) {
             e.printStackTrace();

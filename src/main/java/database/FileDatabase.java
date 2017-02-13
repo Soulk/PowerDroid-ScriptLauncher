@@ -1,5 +1,6 @@
 package database;
 
+import model.Script;
 import model.ScriptFiles;
 
 import java.io.*;
@@ -17,7 +18,7 @@ public class FileDatabase {
         ScriptFiles scriptFiles = null;
         DatabaseMetaData md = null;
         Statement stmt = null;
-        String query = "select * from script where idscript = " + id;
+        String query = "select * from file_table where id = " + id;
         try {
             stmt = Connexion.getDbconnect().createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -42,11 +43,10 @@ public class FileDatabase {
         ScriptFiles s = new ScriptFiles();
         try {
             s.setId(rs.getInt("id"));
-
             s.setApk(getFile(rs.getString("filenameapk"), rs.getBytes("dataapk")));
-            s.setApk(getFile(rs.getString("filenamemanifest"), rs.getBytes("datamanifest")));
-            s.setApk(getFile(rs.getString("filenameapktest"), rs.getBytes("dataapktest")));
-            s.setApk(getFile(rs.getString("filenamemanifestandroid"), rs.getBytes("datamanifestandroid")));
+            s.setManifest(getFile(rs.getString("filenamemanifest"), rs.getBytes("datamanifest")));
+            s.setApkTest(getFile(rs.getString("filenameapktest"), rs.getBytes("dataapktest")));
+            s.setManifestAndroid(getFile(rs.getString("filenamemanifestandroid"), rs.getBytes("datamanifestandroid")));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -57,10 +57,40 @@ public class FileDatabase {
 
     private static File getFile(String filename, byte[] data) throws IOException {
         File file = new File(filename);
-        if(!file.exists()) file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(data);
-        fos.close();
-        return file;
+        if(!filename.equals("")) {
+            if (!file.exists())
+                file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(data);
+            fos.close();
+            return file;
+        }
+        return null;
+    }
+
+    public static void delete(ScriptFiles scriptFiles) {
+        File file=null;
+        if(scriptFiles.getApk() != null) {
+            file = new File(scriptFiles.getApk().getName());
+            if (file.exists())
+                file.delete();
+        }
+
+        if(scriptFiles.getApkTest()!= null) {
+            file = new File(scriptFiles.getApkTest().getName());
+            if (file.exists())
+                file.delete();
+        }
+
+        if(scriptFiles.getManifest() != null) {
+            file = new File(scriptFiles.getManifest().getName());
+            if (file.exists())
+                file.delete();
+        }
+        if(!scriptFiles.getManifestAndroid().getName().equals("")) {
+            file = new File(scriptFiles.getManifestAndroid().getName());
+            if (file.exists())
+                file.delete();
+        }
     }
 }

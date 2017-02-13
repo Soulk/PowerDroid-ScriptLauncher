@@ -10,7 +10,8 @@ public class Result {
     private Integer idFile;
     private File fileResult;
 
-    public Result(Integer idFile, File fileResult) {
+    public Result(Integer idResult, Integer idFile, File fileResult) {
+        this.idResult=idResult;
         this.idFile = idFile;
         this.fileResult = fileResult;
     }
