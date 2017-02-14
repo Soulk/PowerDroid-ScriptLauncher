@@ -4,6 +4,7 @@ import com.sun.media.jfxmedia.logging.Logger;
 import database.FileDatabase;
 import database.ResultDatabase;
 import database.ScriptDatabase;
+import pdsl.PowerDroidSL;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static pdsl.PowerDroidSL.CSV_DATA_FILE_NAME;
+import static pdsl.PowerDroidSL.POWERDROID_SL_HOME_DIRECTORY;
+
 /**
  * Created by David on 27/01/2017.
  */
 public class ScriptLauncher {
 
     List<Script> l_script;
+    File pythonScriptFolder;
     public List<Script> getL_script() {
         return l_script;
     }
@@ -27,7 +32,8 @@ public class ScriptLauncher {
         l_script = new ArrayList<Script>();
     }
 
-    public void run() {
+    public void run(File pythonScriptFolder) {
+        this.pythonScriptFolder = pythonScriptFolder;
         getAllScript();
         System.out.println("Script(s) to execute : " + l_script.size());
         for(int i = 0; i < l_script.size(); i ++){
@@ -41,10 +47,6 @@ public class ScriptLauncher {
             }
         }
         l_script.clear();
-
-        //TEST
-
-
     }
 
     public void getAllScript() {
@@ -59,7 +61,7 @@ public class ScriptLauncher {
     }
     public Result executeScript(Script script, ScriptFiles files){
         Result result = null;
-        File pathFile = new File("\"./script/platform-tools/script.bat\"");
+        File pathFile = new File(POWERDROID_SL_HOME_DIRECTORY+File.separator+"script.sh");//new File("\"./script/platform-tools/script.bat\"");
 
         Path path = pathFile.toPath();
         if(script.getMethod().equals("robotium")){
@@ -111,20 +113,30 @@ public class ScriptLauncher {
         if(Files.exists(path)){
             Logger.logMsg(Logger.INFO, "Successful Write to " + path);
 
-            ProcessBuilder builder = new ProcessBuilder("start script.bat");
+            ProcessBuilder buildMonitor = new ProcessBuilder("sudo", "python", "collectData.py",  "data.csv",  "/dev/ttyACM0",  "1");
+            buildMonitor.directory(pythonScriptFolder);
+
+            ProcessBuilder builderScriptADB = new ProcessBuilder("/bin/bash", pathFile.getAbsolutePath());//new ProcessBuilder("start","script.bat");
+
             try {
 
 
-                File outputFile = new File("");
+                File dataCSV = new File(POWERDROID_SL_HOME_DIRECTORY+File.separator+CSV_DATA_FILE_NAME);
 
-                builder.redirectOutput(outputFile);
-                Process process = builder.start();
+                //builder.redirectOutput(outputFile);
 
-                //process.waitFor();
+                Process monitorProcess = buildMonitor.start();
 
+                Process adbProcess = builderScriptADB.start();
 
-                result = new Result(script.getId(),script.getIdFile(), outputFile);
+                adbProcess.waitFor();
+
+                monitorProcess.destroy();
+
+                result = new Result(script.getId(),script.getIdFile(), dataCSV);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else {
