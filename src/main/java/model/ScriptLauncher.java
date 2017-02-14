@@ -61,7 +61,7 @@ public class ScriptLauncher {
     }
     public Result executeScript(Script script, ScriptFiles files){
         Result result = null;
-        File pathFile = new File(POWERDROID_SL_HOME_DIRECTORY+File.separator+"script.sh");//new File("\"./script/platform-tools/script.bat\"");
+        File pathFile = new File(/*POWERDROID_SL_HOME_DIRECTORY+File.separator+*/"script.sh");//new File("\"./script/platform-tools/script.bat\"");
 
         Path path = pathFile.toPath();
         if(script.getMethod().equals("robotium")){
