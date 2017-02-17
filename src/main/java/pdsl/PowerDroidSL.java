@@ -26,7 +26,7 @@ public class PowerDroidSL {
         //Files.deleteIfExists(PDSLFolder.toPath());
         if(!PDSLFolder.exists()) PDSLFolder.mkdir();
 
-        Connexion con = new Connexion("jdbc:postgresql://localhost:5432/todo","postgres","lolilol97");
+        Connexion con = new Connexion("jdbc:postgresql://localhost:5432/postgres","postgres","postgres");
 
         ScriptLauncher sl = new ScriptLauncher();
 
